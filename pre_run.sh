@@ -1,0 +1,1 @@
+pip install setuptools wheel wget firebase_admin adafruit-io

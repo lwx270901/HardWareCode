@@ -1,0 +1,25 @@
+{
+    "FireBaseConfig": {
+        "ServiceAccountKey" : "${ROOT_WORKSPACE}/test_config/serviceAccountKey.json",
+        "storagebucket": "cloudfirestoretutorial-2c325.appspot.com"
+    },
+    "AdafruitConfig": {
+        "ADAFRUIT_IO_USERNAME": "izayazuna",
+        "ADAFRUIT_IO_KEY": "aio_UGWB75AXectDhYGRLrmgGv2pGwP8",
+        "ADAFRUIT_IO_FEED": "temperature"
+    },
+    "MongoDBConfig": 
+    {
+        "connection_string" : "mongodb+srv://jay:<password>@dacn.wpcb58c.mongodb.net/?retryWrites=true&w=majority",
+        "password" : "viper270901",
+        "dbname" : "iot"
+    },
+    "DirEnvironment" :{
+        "images_dir": "${ROOT_WORKSPACE}/images",
+        "images_capture":"${ROOT_WORKSPACE}/image_capture",
+        "config_dir": "${ROOT_WORKSPACE}/test_config",
+        "log_dir": "${ROOT_WORKSPACE}/log"
+    }
+
+      
+}
