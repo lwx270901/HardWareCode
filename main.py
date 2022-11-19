@@ -84,19 +84,12 @@ def thread1(queue, argm ):
     while True:
 
         ret, img = cap.read()
-
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
         faces = faceCascade.detectMultiScale(
-
             gray,    
-
             scaleFactor=1.2,
-
             minNeighbors=5,    
-
             minSize=(20, 20)
-
         )
         print("Found {0} faces!".format(len(faces)))
 
