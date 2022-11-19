@@ -20,6 +20,4 @@
         "config_dir": "${ROOT_WORKSPACE}/test_config",
         "log_dir": "${ROOT_WORKSPACE}/log"
     }
-
-      
 }

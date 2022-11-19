@@ -3,7 +3,7 @@ import os
 import sys
 import argparse
 import subprocess
-
+import string
 
 import threading
 import numpy as np
@@ -59,7 +59,7 @@ def generate_random_string(string_length):
     return ''.join(random.choices(string.ascii_letters, k=string_length))
 
 
-faceCascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
+faceCascade = cv2.CascadeClassifier('ai_models/haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 cap.set(3,640) # set Width
 cap.set(4,480) # set Height
@@ -129,11 +129,7 @@ def thread1(queue, argm ):
                 if queue.empty():
                     break
             
-        
-
         cv2.imshow('video',img)
-
-
         k = cv2.waitKey(30) & 0xff
         if(k) == ord("q"):
 
@@ -167,8 +163,6 @@ def thread2(queue, argm):
             break
 
        
-
- 
 
 if __name__ =="__main__":
     arg_parser = argparse.ArgumentParser(formatter_class=argparse.ArgumentDefaultsHelpFormatter, description=g_description)
@@ -256,4 +250,4 @@ if __name__ =="__main__":
     else:
         exit_program("Missing test configuration file!", 1)
 
-    local_command.exec('find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf')
+    # local_command.exec('find . | grep -E "(__pycache__|\.pyc|\.pyo$)" | xargs rm -rf')
