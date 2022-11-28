@@ -58,11 +58,13 @@ FILENAME_LENGTH = 6
 def generate_random_string(string_length):
     return ''.join(random.choices(string.ascii_letters, k=string_length))
 
-
+#Face detection
 faceCascade = cv2.CascadeClassifier('ai_models/haarcascade_frontalface_default.xml')
 cap = cv2.VideoCapture(0)
 cap.set(3,640) # set Width
 cap.set(4,480) # set Height
+
+
 
 # initialize the cv2 QRCode detector
 detector = cv2.QRCodeDetector()
@@ -77,11 +79,11 @@ class Argument:
         self.fb = fb
         self.mongodb_api = mongodb_api
 
-
 def thread1(queue, argm ):
     count = 0
 
     while True:
+        
 
         ret, img = cap.read()
         gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
@@ -91,7 +93,6 @@ def thread1(queue, argm ):
             minNeighbors=5,    
             minSize=(20, 20)
         )
-        print("Found {0} faces!".format(len(faces)))
 
         if count == 0 and len(faces) > 0:
             i = len(faces)
@@ -111,28 +112,23 @@ def thread1(queue, argm ):
                     "time": current_time,
                     "image": image_link
                 })
+                
         # Draw a rectangle around the faces
         for (x,y,w,h) in faces:
             cv2.rectangle(img,(x,y),(x+w,y+h),(255,0,0),2)
             roi_gray = gray[y:y+h, x:x+w]
             roi_color = img[y:y+h, x:x+w]
-
             
-        if len(faces) > 0 and queue.qsize() < 1:
+        if len(faces) > 0 and queue.empty():
             queue.put(img)
-            print(type(faces))
             print("Have faces")
-        
-        if queue.empty() == False:
-            for i in range(10):
-                time.sleep(1)
-                if queue.empty():
-                    break
             
-        cv2.imshow('video',img)
+        if queue.empty() == False:
+            time.sleep(1)
+            
+        cv2.imshow('face_detection',img)
         k = cv2.waitKey(30) & 0xff
         if(k) == ord("q"):
-
             break
 
            
@@ -140,26 +136,18 @@ def thread1(queue, argm ):
 def thread2(queue, argm):
 
     while True:
-
         _, img = cap.read()
-
         data, bbox, _ = detector.detectAndDecode(img)
-
         # check if there is a QRCode in the image
-        
         if data:
             a=data
             if a == mock_QR:
                 queue.get()
-                print("Do the print information task")
+                print("Can get access")
                 queue.task_done()
-        
-
         cv2.imshow("QRCODEscanner", img)  
-
         k = cv2.waitKey(30) & 0xff
         if(k) == ord("q"):
-
             break
 
        
@@ -205,18 +193,12 @@ if __name__ =="__main__":
         jsonreader.read_json_file(test_config)
         #init firebase
         dir_environment = jsonreader.get_value_by_key('DirEnvironment')
-
-
         fb_config  = jsonreader.get_value_by_key('FireBaseConfig')
-        print (fb_config)
-        print(fb_config['ServiceAccountKey'])
-        print(fb_config['storagebucket'])
 
         firebase_storage = Firebase_API(
             Accountkey= fb_config['ServiceAccountKey'],
             storagebucket= fb_config['storagebucket']
         )
-
         #init mongodb
         mongodb_config = jsonreader.get_value_by_key('MongoDBConfig')
         connection_string = mongodb_config['connection_string']
@@ -229,10 +211,6 @@ if __name__ =="__main__":
         #init file
       
         file_module = File.Local()
-
-
-
-
         #init Argument
         argm = Argument(dir_environment['images_capture'], os.environ['ROOT_WORKSPACE'], file_module, local_command, firebase_storage, mgdbs )
 
@@ -240,8 +218,8 @@ if __name__ =="__main__":
         t1 = threading.Thread(target=thread1, args =(q, argm))
         t2 = threading.Thread(target=thread2, args =(q, argm))    
         # starting threads
-        t1.start()
         t2.start()
+        t1.start()
         # wait until all threads finish
         t1.join()
         t2.join()                    

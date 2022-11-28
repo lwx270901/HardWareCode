@@ -20,3 +20,16 @@ class mongo_dbs:
 
     def delete_test_doc(self, id):
         pass
+    
+
+# client = MongoClient("mongodb+srv://shineinouzen:viper270901@dacn.ncyeov0.mongodb.net/?retryWrites=true&w=majority")
+# db = client["Server"]
+# collection = db["event"]
+# document = {
+#     "time":"Adfaf",
+#     "image":"afeawf"
+# }
+# # collection.insert_one(document)
+
+# mg = mongo_dbs("mongodb+srv://shineinouzen:viper270901@dacn.ncyeov0.mongodb.net/?retryWrites=true&w=majority", "Server")
+# mg.insert_test_doc("event", document)

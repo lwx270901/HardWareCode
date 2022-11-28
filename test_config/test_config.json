@@ -10,9 +10,9 @@
     },
     "MongoDBConfig": 
     {
-        "connection_string" : "mongodb+srv://jay:<password>@dacn.wpcb58c.mongodb.net/?retryWrites=true&w=majority",
+        "connection_string" : "mongodb+srv://shineinouzen:<password>@dacn.ncyeov0.mongodb.net/?retryWrites=true&w=majority",
         "password" : "viper270901",
-        "dbname" : "iot"
+        "dbname" : "Server"
     },
     "DirEnvironment" :{
         "images_dir": "${ROOT_WORKSPACE}/images",
