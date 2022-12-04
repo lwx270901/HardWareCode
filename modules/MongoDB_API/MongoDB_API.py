@@ -18,6 +18,15 @@ class mongo_dbs:
     def read_test_doc(self, id):
         pass
 
+    def get_QR_code(self, collection_name, id):
+        from bson.objectid import ObjectId
+        collection = self.test_db[collection_name]
+
+        _id = ObjectId(id)
+        obj = collection.find_one({"_id": _id})
+        return obj
+
+
     def delete_test_doc(self, id):
         pass
     
@@ -25,11 +34,14 @@ class mongo_dbs:
 # client = MongoClient("mongodb+srv://shineinouzen:viper270901@dacn.ncyeov0.mongodb.net/?retryWrites=true&w=majority")
 # db = client["Server"]
 # collection = db["event"]
+# PkI6a3nf5faU9Hil
 # document = {
 #     "time":"Adfaf",
 #     "image":"afeawf"
 # }
 # # collection.insert_one(document)
 
-# mg = mongo_dbs("mongodb+srv://shineinouzen:viper270901@dacn.ncyeov0.mongodb.net/?retryWrites=true&w=majority", "Server")
-# mg.insert_test_doc("event", document)
+# mg = mongo_dbs("mongodb+srv://minh:minh@server.tdyzh9j.mongodb.net/?retryWrites=true&w=majority", "DB")
+# ex = mg.get_QR_code("users", "638b7d621f8781fa9278893e")
+
+# print(ex)
