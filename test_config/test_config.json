@@ -10,9 +10,9 @@
     },
     "MongoDBConfig": 
     {
-        "connection_string" : "mongodb+srv://shineinouzen:<password>@dacn.ncyeov0.mongodb.net/?retryWrites=true&w=majority",
-        "password" : "viper270901",
-        "dbname" : "Server"
+        "connection_string" : "mongodb+srv://minh:<password>@server.tdyzh9j.mongodb.net/?retryWrites=true&w=majority",
+        "password" : "minh",
+        "dbname" : "DB"
     },
     "DirEnvironment" :{
         "images_dir": "${ROOT_WORKSPACE}/images",

@@ -87,10 +87,8 @@ def QRThread(q, argm):
         data, bbox, _ = detector.detectAndDecode(img)
         # check if there is a QRCode in the image
         if data:
-            #Search data from mongodb and compare w
-            obj = argm.mongodb_api.get_QR_code("users" ,data)
-            if obj:
-                print(obj)
+            a = data
+            print(a)
             pass
         cv2.imshow("QRCODEscanner", img)   
         if cv2.waitKey(1) == ord("q"):
