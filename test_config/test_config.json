@@ -10,7 +10,7 @@
     },
     "MongoDBConfig": 
     {
-        "connection_string" : "mongodb+srv://minh:<password>@server.tdyzh9j.mongodb.net/?retryWrites=true&w=majority",
+        "connection_string" : "mongodb+srv://minh:<password>@server.tdyzh9j.mongodb.net/test",
         "password" : "minh",
         "dbname" : "DB"
     },
