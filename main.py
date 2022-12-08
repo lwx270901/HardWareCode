@@ -90,7 +90,11 @@ def QRThread(q, argm):
             #Search data from mongodb and compare w
             obj = argm.mongodb_api.get_QR_code("users" ,data)
             if obj:
+                signal = 1
+                q.put(signal)
                 print(obj)
+            else:
+                print("QR code is not valid")
             pass
         cv2.imshow("QRCODEscanner", img)   
         if cv2.waitKey(1) == ord("q"):
@@ -103,6 +107,12 @@ def IRThread(q, argm):
         # Capture the video frame
         # by frame
         ret, frame = Facecam.read()
+
+        #Get signal
+        data = q.get()
+
+        if data:
+            print("IR going though pending mode. ")
     
         # Display the resulting frame
         cv2.imshow('frame', frame)
